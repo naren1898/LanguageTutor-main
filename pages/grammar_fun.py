@@ -7,7 +7,6 @@ from openai import OpenAI
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 def generate_grammar_exercise():
-    print(st.secrets["OPENAI_API_KEY"])
     ## Using OpenAI to generate a grammar exercise
     completion = client.chat.completions.create(
       model="gpt-3.5-turbo",

@@ -8,7 +8,8 @@ import wave
 import openai
 import config
 from openai import OpenAI
-client = OpenAI(api_key=config.API_KEY)
+#client = OpenAI(api_key=config.API_KEY)
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 
 
