@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 import numpy as np
-import sounddevice as sd
+#import sounddevice as sd
 import io
 from scipy.io.wavfile import write
 import wave
@@ -97,8 +97,9 @@ def app():
             duration = 30  # seconds
             sample_rate = 44100  # Sample rate
             st.write('Recording started... speak now!')
-            myrecording = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
-            sd.wait()  # Wait until recording is finished
+            #myrecording = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
+            #sd.wait()  # Wait until recording is finished
+            myrecording = ""
             st.write('Recording Done!')
             st.session_state.recording_started = False
             # Convert the NumPy array to audio file
