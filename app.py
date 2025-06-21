@@ -1,4 +1,3 @@
-import pyaudio
 import streamlit as st
 from pages import home, image_comprehension, grammar_fun, reading_translation
 
