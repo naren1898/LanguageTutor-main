@@ -3,7 +3,8 @@ import requests
 #import sounddevice as sd
 import config
 from openai import OpenAI
-from pages import voice_recording_wb
+#from pages import voice_recording_wb
+from pages import Voice_recorder
 
 #client = OpenAI(api_key=config.API_KEY)
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -88,9 +89,9 @@ def app():
             st.session_state.image_generated = True
             #print(st.session_state.image_generated)
         st.image(st.session_state.image_url, caption='Describe this image.')
-        st.subheader('You have to describe and talk about what you see in the image. Take your time look and analyse the image think about what you want to say and then start.\n You will have 30 seconds to speak about it. Focus on rich decription fluid speech.')
+        st.subheader('You have to describe and talk about what you see in the image. Take your time look and analyse the image think about what you want to say and then start.\n Please use the below start/stop for providing your input. Focus on rich decription fluid speech.')
         if st.session_state.image_generated:
-            output_file = voice_recording_wb.process_audio()
+            output_file = Voice_recorder.process_audio()
             print("op->", output_file)
 
         if st.button('Validate'):
