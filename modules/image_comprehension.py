@@ -3,8 +3,8 @@ import requests
 #import sounddevice as sd
 import config
 from openai import OpenAI
-#from pages import voice_recording_wb
-from pages import Voice_recorder
+#from modules import voice_recording_wb
+from modules import Voice_recorder
 
 #client = OpenAI(api_key=config.API_KEY)
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
@@ -105,7 +105,7 @@ def app():
             #st.write('Recording Done!')
             st.session_state.recording_started = False
             # Convert the NumPy array to audio file
-            st.write('Generating Feedback...')
+            st.write('Generating AI Feedback ...')
             #output_file = "output2.wav"
             #with wave.open(output_file, 'w') as wf:
             #    wf.setnchannels(1)  # Stereo
