@@ -10,7 +10,7 @@ import config
 from openai import OpenAI
 #client = OpenAI(api_key=config.API_KEY)
 client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
-
+from Voice_recording_web import process_audio
 
 
 def speech_to_text(file_path):
@@ -96,21 +96,22 @@ def app():
         if st.button('Start Talking'):
             st.session_state.recording_started = True
             duration = 30  # seconds
-            sample_rate = 44100  # Sample rate
+            #sample_rate = 44100  # Sample rate
             st.write('Recording started... speak now!')
             #myrecording = sd.rec(int(duration * sample_rate), samplerate=sample_rate, channels=1, dtype='int16')
             #sd.wait()  # Wait until recording is finished
-            myrecording = ""
+            output_file = process_audio()
+            #myrecording = ""
             st.write('Recording Done!')
             st.session_state.recording_started = False
             # Convert the NumPy array to audio file
             st.write('Recording stopped.')
-            output_file = "output2.wav"
-            with wave.open(output_file, 'w') as wf:
-                wf.setnchannels(1)  # Stereo
-                wf.setsampwidth(2)  # Sample width in bytes
-                wf.setframerate(sample_rate)
-                wf.writeframes(myrecording.tobytes())
+            #output_file = "output2.wav"
+            #with wave.open(output_file, 'w') as wf:
+            #    wf.setnchannels(1)  # Stereo
+            #    wf.setsampwidth(2)  # Sample width in bytes
+            #    wf.setframerate(sample_rate)
+            #    wf.writeframes(myrecording.tobytes())
 
             print(f"Audio saved to {output_file}")
             user_description = speech_to_text("output2.wav")
