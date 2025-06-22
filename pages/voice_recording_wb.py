@@ -1,14 +1,19 @@
-import streamlit as st
 from streamlit_webrtc import webrtc_streamer, AudioProcessorBase, WebRtcMode
 import av
+import streamlit as st
 import wave
 import os
 
 
 def process_audio():
-    output_dir = "audio_output"
+    output_dir = os.getcwd()
+    #"C:\\Users\\naren\\Downloads\\LanguageTutor-main\\pages\\audio_output"
+    #os.getcwd()
+    print(output_dir)
+    #print(st.session_state)
     filename = "recorded_audio.raw"
     file_path = os.path.join(output_dir, filename)
+    file_path1 = os.path.join(output_dir, "recorded_audio.wav")
     class AudioProcessor(AudioProcessorBase):
         initialized = False
         def recv(self, frame: av.AudioFrame) -> av.AudioFrame:
@@ -32,15 +37,16 @@ def process_audio():
         audio_processor_factory=AudioProcessor,
         media_stream_constraints={"audio": True, "video": False}
     )
-    with open("audio_output/recorded_audio.raw", "rb") as raw_file:
-        raw_data = raw_file.read()
 
-    with wave.open("audio_output/recorded_audio.wav", "wb") as wf:
-        wf.setnchannels(1)
-        wf.setsampwidth(2)  # 16-bit
-        wf.setframerate(96000)
-        wf.writeframes(raw_data)
-    return file_path
+    #print(st.session_state)
+    if ctx and ctx.state.playing is False and os.path.exists(file_path):
+        with open(file_path, "rb") as raw_file:
+            raw_data = raw_file.read()
 
-process_audio()
+        with wave.open(file_path1, "wb") as wf:
+            wf.setnchannels(1)
+            wf.setsampwidth(2)  # 16-bit
+            wf.setframerate(96000)
+            wf.writeframes(raw_data)
+        return file_path1
 
